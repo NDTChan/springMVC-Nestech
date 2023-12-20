@@ -14,9 +14,7 @@ public class ProductService {
     ProductRepository productRepository;
 
     public void addProduct(Product product) {
-        if (product.getNumber() > 1) {
-            productRepository.save(product);
-        }
+        productRepository.save(product);
     }
 
     public List<Product> getAll() {
