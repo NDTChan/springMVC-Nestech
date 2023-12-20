@@ -14,17 +14,17 @@ public class ProductService {
     ProductRepository productRepository;
 
     public void addProduct(Product product) {
-        if (product.getNumber() > 1 && !productRepository.isDuplicateId(product.getId())) {
+        if (product.getNumber() > 1) {
             productRepository.save(product);
         }
     }
 
     public List<Product> getAll() {
-        return productRepository.getAll();
+        return productRepository.findAll();
     }
 
     public void delete(int id) {
-        productRepository.delete(id);
+        productRepository.deleteById(id);
     }
 
     public Product getById(int id) {
@@ -32,6 +32,11 @@ public class ProductService {
     }
 
     public void update(int id, String name, int number) {
-        productRepository.update(id, name, number);
+        Product product = productRepository.getById(id);
+
+        product.setName(name);
+        product.setNumber(number);
+
+        productRepository.save(product);
     }
 }
